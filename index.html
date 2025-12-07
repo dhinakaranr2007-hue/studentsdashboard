@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Management Dashboard | Ultra UI</title>
+<link rel="stylesheet" href="css/style.css">
+<!-- Load Font Awesome for icons (Edit, Delete, Add, Theme Switch) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="theme-toggle">
+    <label class="switch">
+        <input type="checkbox" id="themeSwitch">
+        <span class="slider round"></span>
+    </label>
+    <span id="themeText">Light Mode</span>
+</div>
+
+<div class="container">
+    <h1 class="neon-glow">Student Management Dashboard</h1>
+    
+    <!-- Neumorphic Form Card -->
+    <div class="form-card neumorphic">
+        <form id="studentForm">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="text" id="reg" placeholder="Reg No" required>
+            <input type="text" id="dept" placeholder="Department" required>
+            <input type="number" id="year" placeholder="Year" required>
+            <input type="number" id="marks" placeholder="Marks (0-100)" required>
+            <button type="submit" id="addBtn" class="ripple-button"><i class="fas fa-plus"></i> Add Student</button>
+        </form>
+    </div>
+
+    <!-- Search/Filter Input -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="🔍 Search by Name or Reg No..." class="neumorphic-input">
+    </div>
+
+    <!-- Glassmorphism Table Container -->
+    <div class="table-container glassmorphism">
+        <table id="studentTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Reg No</th>
+                    <th>Dept</th>
+                    <th>Year</th>
+                    <th>Marks</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Student rows are added here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Custom Modal for Alerts and Confirmations (Instead of browser native alert()) -->
+<div id="customModal" class="modal-backdrop">
+    <div class="modal-content neumorphic">
+        <h3 id="modalTitle"></h3>
+        <p id="modalMessage"></p>
+        <div id="modalButtons" style="display: flex; justify-content: center; gap: 10px; margin-top: 15px;">
+            <button id="modalClose" class="ripple-button">OK</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

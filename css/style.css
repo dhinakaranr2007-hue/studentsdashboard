@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* --- COLOR PALETTE & GLOBAL VARIABLES (Light Mode) --- */
+:root {
+    --primary: #4A90E2; /* Blue */
+    --accent: #E94E77; /* Pink/Red */
+    --text-light: #f0f0f0;
+    --text-dark: #333;
+    --bg-light: #f0f2f5;
+    --bg-card-light: #ffffff;
+    --shadow-inner-light: inset 5px 5px 10px #d9d9d9, inset -5px -5px 10px #ffffff;
+    --shadow-outer-light: 8px 8px 15px #d9d9d9, -8px -8px 15px #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.4);
+}
+
+/* Dark theme variables (Cyberpunk / High Contrast) */
+body.dark {
+    --primary: #00bcd4; /* Cyan */
+    --accent: #ff007f; /* Neon Pink */
+    --text-light: #f0f0f0;
+    --text-dark: #f0f0f0;
+    --bg-light: #121212;
+    --bg-card-light: #1e1e1e;
+    --shadow-inner-light: inset 5px 5px 10px #0a0a0a, inset -5px -5px 10px #2a2a2a;
+    --shadow-outer-light: 8px 8px 15px #0a0a0a, -8px -8px 15px #2a2a2a;
+    --glass-bg: rgba(0, 0, 0, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* --- BASE STYLES --- */
+* { box-sizing: border-box; margin:0; padding:0; font-family: 'Montserrat', sans-serif; }
+
+body {
+    background: var(--bg-light);
+    color: var(--text-dark);
+    padding: 20px;
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.container { max-width: 1200px; margin: auto; }
+
+/* --- NEON EFFECT (H1) --- */
+.neon-glow { 
+    text-align: center; 
+    margin-bottom: 30px; 
+    font-size: 2.5rem;
+    color: var(--primary);
+    text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary), 0 0 20px var(--accent);
+    animation: flicker 1.5s infinite alternate;
+}
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.8; }
+}
+
+/* --- NEUMORPHISM CARD & INPUTS --- */
+.form-card {
+    padding: 30px;
+    border-radius: 25px;
+    margin-bottom: 30px;
+    background: var(--bg-light);
+    box-shadow: var(--shadow-outer-light);
+    transition: all 0.5s;
+}
+.neumorphic { box-shadow: var(--shadow-outer-light); }
+
+/* Form and Search Inputs */
+#studentForm { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+#studentForm input, .neumorphic-input {
+    flex: 1 1 180px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 12px;
+    background: var(--bg-light);
+    color: var(--text-dark);
+    box-shadow: var(--shadow-inner-light);
+    transition: all 0.3s ease-in-out;
+    min-width: 150px;
+}
+#studentForm input:focus, .neumorphic-input:focus {
+    outline: none;
+    box-shadow: 0 0 10px var(--primary);
+    transform: scale(1.02);
+}
+.search-container { text-align: center; margin-bottom: 30px; }
+#searchInput { max-width: 600px; }
+
+/* --- RIPPLE BUTTON EFFECT --- */
+.ripple-button {
+    overflow: hidden;
+    position: relative;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(145deg, var(--primary), #3b74b6);
+    color: var(--text-light);
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 4px 4px 8px #999, -4px -4px 8px #fff;
+    transition: all 0.3s;
+}
+.ripple-button:active {
+    transform: scale(0.98);
+    box-shadow: var(--shadow-inner-light);
+}
+.ripple-button:hover { 
+    background: var(--accent);
+}
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+@keyframes ripple {
+    to { transform: scale(4); opacity: 0; }
+}
+
+/* --- GLASSCMORPHISM TABLE --- */
+.table-container { 
+    border-radius: 20px;
+    background: var(--glass-bg);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    padding: 20px;
+    overflow-x: auto;
+    transition: all 0.6s;
+}
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    min-width: 800px;
+}
+th, td { 
+    padding: 15px; 
+    text-align: center; 
+    border: none; 
+    color: var(--text-dark);
+}
+th {
+    background: var(--primary);
+    color: var(--text-light);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    position: sticky;
+    top: 0;
+}
+
+/* Table Row Entry Animation (The Ultra Effect) */
+@keyframes rowFadeIn { 
+    from { opacity: 0; transform: translateY(30px) rotateX(-90deg); } 
+    to { opacity: 1; transform: translateY(0) rotateX(0deg); } 
+}
+.table-row-animated { 
+    animation: rowFadeIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+tbody tr {
+    transition: all 0.3s ease;
+    background: transparent;
+}
+tbody tr:nth-child(odd) { background: rgba(0, 0, 0, 0.05); }
+body.dark tbody tr:nth-child(odd) { background: rgba(255, 255, 255, 0.05); }
+
+tbody tr:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+body.dark tbody tr:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Action Buttons */
+.edit-btn, .delete-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 0 5px;
+    color: white;
+    font-weight: 700;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+.edit-btn { background: #28a745; } 
+.delete-btn { background: #E94E77; } /* Use accent color for delete */ 
+
+.edit-btn:hover { background: #218838; transform: translateY(-1px); }
+.delete-btn:hover { background: #cc0060; transform: translateY(-1px); }
+
+/* --- MODAL (Replacing Alert) --- */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.modal-backdrop.visible {
+    display: flex;
+    opacity: 1;
+}
+.modal-content {
+    background: var(--bg-light);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    transform: scale(0.7);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bounce transition */
+}
+.modal-backdrop.visible .modal-content {
+    transform: scale(1);
+}
+#modalTitle { color: var(--accent); margin-bottom: 10px; }
+#modalMessage { margin-bottom: 20px; }
+
+/* --- Theme Toggle (Modernized) --- */
+.theme-toggle { 
+    display:flex; 
+    align-items:center; 
+    gap:10px; 
+    justify-content:flex-end; 
+    margin-bottom: 20px; 
+}
+.switch { position: relative; display: inline-block; width: 60px; height: 34px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { 
+    position: absolute; cursor: pointer; top:0; left:0; right:0; bottom:0; 
+    background:#ccc; transition:.4s; border-radius:34px; 
+    box-shadow: var(--shadow-outer-light);
+}
+.slider:before { 
+    position:absolute; 
+    content:"\f185"; /* Sun icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 16px;
+    height:26px; width:26px; 
+    line-height: 26px;
+    text-align: center;
+    left:4px; bottom:4px; 
+    background:white; 
+    color: orange;
+    transition:.4s; 
+    border-radius:50%; 
+}
+input:checked + .slider { background: var(--primary); }
+input:checked + .slider:before { 
+    transform: translateX(26px); 
+    content: "\f186"; /* Moon icon */
+    color: #4A90E2;
+}
+body.dark #themeText { color: var(--text-light); }
+
+/* --- Responsive Layout --- */
+@media(max-width: 768px){ 
+    #studentForm { flex-direction: column; } 
+    #studentForm input { width: 100%; }
+    #addBtn { width: 100%; }
+    .neon-glow { font-size: 2rem; }
+    .form-card { padding: 20px; }
+    td, th { font-size:12px; padding: 10px; } 
+}
